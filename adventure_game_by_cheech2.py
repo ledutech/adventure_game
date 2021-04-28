@@ -64,7 +64,7 @@ def temple(offerings):
             print_pause("Inside you find a beautiful murti, "
                         "an enormous golden statue of the ")
             print_pause(the_mother)
-            print_pause("She looks SO alive, but the temple is freezing cold.\n ")
+            print_pause("She looks SO alive, but the temple is freezing.\n ")
             print_pause("The sacred dhune fire has long been extinguished.\n ")
             print_pause("Brrrr!!!!!\n ")
             print_pause("Standing in front of the Goddess, you notice "
@@ -146,8 +146,8 @@ def adventure(offerings):
 
 def hike_again():
     response = valid_input("Would you like to hike again? "
-                     "Please say 'yes' or 'no'.\n",
-                     "yes", "no")
+                           "Please say 'yes' or 'no'.\n",
+                           "yes", "no")
     if "no" in response:
         print_pause("OK, goodbye!")
     elif "yes" in response:
@@ -178,5 +178,7 @@ def game():
         if not play_again():
             print('Bye!')
             exit(0)
+
+
 if __name__ == '__main__':
     game()
