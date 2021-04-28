@@ -43,37 +43,38 @@ def encounter():
 def temple(offerings):
     print_pause("You ascend the jewel-toned temple steps "
                 "and enter the ancient structure.\n ")
-    if "fire" in offerings:
-        print_pause("You light the sacred fire with your camp lighter.")
-        print_pause("The sacred fire illuminates the temple and warms you.\n")
-        print_pause("You're ready to move out!\n")
-        print_pause("Ready for transport?\n ")
-        adventure(offerings)
-    if "abhaya" in offerings:
-        print_pause("You hear a kind voice say:\n")
-        print_pause("Go now, harness the elements "
-                    "with the Mother's blessing.\n")
-        print_pause("You go out and down the temple stairs again.\n")
-        print_pause("Ready for transport?\n ")
-        adventure(offerings)
-    if "abhaya" and "fire" and "water" in offerings:
+    if len(offerings) == 3:
         print_pause("You've harnessed the elements and WON by surviving!\n")
         hike_again()
     else:
-        print_pause("Inside you find a beautiful murti, "
-                    "an enormous golden statue of the ")
-        print_pause(the_mother)
-        print_pause("She looks SO alive, but the temple is freezing cold.\n ")
-        print_pause("The sacred dhune fire has long been extinguished.\n ")
-        print_pause("Brrrr!!!!!\n ")
-        print_pause("Standing in front of the Goddess, you notice "
-                    "a small table before her.\n ")
-        print_pause("You realize that it is meant for visitors to "
-                    "leave their offerings.\n")
-        print_pause("You think you have nothing to give,\n ")
-        print_pause("so you go out and down the temple stairs.\n ")
-        offerings.append("abhaya")
-        adventure(offerings)
+        if "fire" in offerings:
+            print_pause("You light the sacred fire with your camp lighter.")
+            print_pause("The sacred fire illuminates the temple.\n")
+            print_pause("You're ready to move out!\n")
+            print_pause("Ready for transport?\n ")
+            adventure(offerings)
+        if "abhaya" in offerings:
+            print_pause("You hear a kind voice say:\n")
+            print_pause("Go now, harness the elements "
+                        "with the Mother's blessing.\n")
+            print_pause("You go out and down the temple stairs again.\n")
+            print_pause("Ready for transport?\n ")
+            adventure(offerings)
+        else:
+            print_pause("Inside you find a beautiful murti, "
+                        "an enormous golden statue of the ")
+            print_pause(the_mother)
+            print_pause("She looks SO alive, but the temple is freezing cold.\n ")
+            print_pause("The sacred dhune fire has long been extinguished.\n ")
+            print_pause("Brrrr!!!!!\n ")
+            print_pause("Standing in front of the Goddess, you notice "
+                        "a small table before her.\n ")
+            print_pause("You realize that it is meant for visitors to "
+                        "leave their offerings.\n")
+            print_pause("You think you have nothing to give,\n ")
+            print_pause("so you go out and down the temple stairs.\n ")
+            offerings.append("abhaya")
+            adventure(offerings)
 
 
 def basecamp(offerings):
@@ -151,7 +152,7 @@ def hike_again():
         print_pause("OK, goodbye!")
     elif "yes" in response:
         print_pause("Very good, initiate transport.")
-        get_order()
+        play_game()
 
 
 def play_game():
@@ -161,4 +162,21 @@ def play_game():
     hike_again()
 
 
-play_game()
+def play_again():
+    option = valid_input("Play again? [y|n]", ['y', 'n'])
+    if option in 'y':
+        return True
+    return False
+
+
+def game():
+    # Infinite loop.
+    while True:
+        # Play the game in each cycle
+        play_game()
+        # The stop condition.
+        if not play_again():
+            print('Bye!')
+            exit(0)
+if __name__ == '__main__':
+    game()
