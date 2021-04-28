@@ -145,7 +145,7 @@ def adventure(offerings):
 
 
 def hike_again():
-    response = input("Would you like to hike again? "
+    response = valid_input("Would you like to hike again? "
                      "Please say 'yes' or 'no'.\n",
                      "yes", "no")
     if "no" in response:
