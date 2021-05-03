@@ -1,10 +1,13 @@
 import time
 import random
 
-mother = ["Mother Goddess of Compassion, Green Tara",
-          "Mother Goddess of Protection from Illness, Orange Tara",
-          "Mother Goddess of Protection from Fear, Black Wrathful Tara"]
+mother = ["Mother Goddess of Compassion, Green Tara.",
+          "Mother Goddess of Protection from Illness, Orange Tara.",
+          "Mother Goddess of Protection from Fear, Black Wrathful Tara."]
 the_mother = random.choice(mother)
+
+mountains = ["Himalayan Mountains", "Santa Cruz Mountains", "Rocky Mountains"]
+the_mountains = random.choice(mountains)
 
 
 def print_pause(message_to_print):
@@ -23,8 +26,9 @@ def valid_input(prompt, option):
 
 def encounter():
     print_pause("You are on a hike,\n"
-                "in search of spiritual awakening\n"
-                "high in the Himalayan Mountains.\n")
+                "in search of spiritual awakening")
+    print_pause("high in the")
+    print_pause(the_mountains)
     print_pause("Surrounded by wispy clouds, you\n"
                 "encounter a hidden temple emerging from\n"
                 "a nearby snow bank.\n ")
@@ -43,7 +47,7 @@ def encounter():
 def temple(offerings):
     print_pause("You ascend the jewel-toned temple steps "
                 "and enter the ancient structure.\n ")
-    if len(offerings) == 3:
+    if "abhaya" and "fire" and "water" in offerings:
         print_pause("You've harnessed the elements and WON by surviving!\n")
         hike_again()
     else:
@@ -56,14 +60,14 @@ def temple(offerings):
         if "abhaya" in offerings:
             print_pause("You hear a kind voice say:\n")
             print_pause("Go now, harness the elements "
-                        "with the Mother's blessing.\n")
+                        "with the blessing of the")
+            print_pause(random.choice(mother))
             print_pause("You go out and down the temple stairs again.\n")
             print_pause("Ready for transport?\n ")
             adventure(offerings)
         else:
             print_pause("Inside you find a beautiful murti, "
-                        "an enormous golden statue of the ")
-            print_pause(the_mother)
+                        "an enormous golden statue of the Goddess")
             print_pause("She looks SO alive, but the temple is freezing.\n ")
             print_pause("The sacred dhune fire has long been extinguished.\n ")
             print_pause("Brrrr!!!!!\n ")
@@ -74,36 +78,46 @@ def temple(offerings):
             print_pause("You think you have nothing to give,\n ")
             print_pause("so you go out and down the temple stairs.\n ")
             offerings.append("abhaya")
+            print_pause("Ready for transport?\n ")
             adventure(offerings)
 
 
 def basecamp(offerings):
     print_pause("You lie down on your back in the snow and roll into "
                 "a tight ball.\n ")
-    if "fire" in offerings:
-        print_pause("Wait!  There's nowhere to roll to now.\n ")
-        print_pause("You've already got your gear and your transporter.\n ")
-        if "abhaya" in offerings:
-            print_pause("No broken bones!  Must be the blessing!\n ")
-        else:
-            print_pause("Ready for transport?\n ")
-            adventure(offerings)
-        if "water" in offerings:
-            print_pause("Your canteen is brimming, let's move out!\n ")
-        else:
-            print_pause("Ready for transport?\n ")
-            adventure(offerings)
+    if "water" and "mud" in offerings:
+        print_pause("Tragedy befalls you!  Mountain mud is deadly \n "
+                    "when paired with melted snow!")
+        print_pause("You have perished and LOST, but you may try to\n"
+                    "hike again next life.\n ")
+        hike_again()
     else:
-        print_pause("You secure your goggles, cinch "
-                    "down the strap on your hat "
-                    "and roll down the mountain.\n ")
-        print_pause("You are like a human sled! Banzai!\n ")
-        print_pause("You land down at basecamp in a crumpled heap.\n ")
-        print_pause("Ouch!\n ")
-        print_pause("You grab your forgotten survival gear.\n ")
-        offerings.append("fire")
-    print_pause("Ready for transport?\n ")
-    adventure(offerings)
+        if "water" in offerings:
+            print_pause("Your canteen is brimming, but you're "
+                        "covered in lethal mountain mud!\n "
+                        "Let's move out to give you a chance\n"
+                        "to walk it off!\n ")
+            offerings.append("mud")
+            print_pause("Ready for transport?\n ")
+            adventure(offerings)
+        if "fire" in offerings:
+            print_pause("Wait!  There's nowhere to roll to now.\n ")
+            print_pause("You've already got your gear and your\n"
+                        "transporter.\n ")
+        if "abhaya" in offerings:
+            print_pause("No broken bones! Must be the blessing!\n ")
+            adventure(offerings)
+        else:
+            print_pause("You secure your goggles, cinch "
+                        "down the strap on your hat "
+                        "and roll down the mountain.\n ")
+            print_pause("You are like a human sled! Banzai!\n ")
+            print_pause("You land down at basecamp in a crumpled heap.\n ")
+            print_pause("Ouch!\n ")
+            print_pause("You grab your forgotten survival gear.\n ")
+            offerings.append("fire")
+            print_pause("Ready for transport?\n ")
+            adventure(offerings)
 
 
 def snowbank(offerings):
@@ -150,6 +164,7 @@ def hike_again():
                            ["yes", "no"])
     if "no" in response:
         print_pause("OK, goodbye!")
+        exit()
     elif "yes" in response:
         print_pause("Very good, initiate transport.")
         play_game()
@@ -162,22 +177,16 @@ def play_game():
     hike_again()
 
 
-def play_again():
-    option = valid_input("Play again? [y|n]", ['y', 'n'])
-    if option in 'y':
-        return True
-    return False
-
-
 def game():
     # Infinite loop.
     while True:
         # Play the game in each cycle
         play_game()
         # The stop condition.
-        if not play_again():
+        if not hike_again():
             print('Bye!')
             exit(0)
+        print_pause("Very good, initiate transport.")
 
 
 if __name__ == '__main__':
